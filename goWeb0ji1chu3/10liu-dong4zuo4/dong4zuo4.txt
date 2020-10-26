@@ -1,0 +1,32 @@
+模板动作   【第六章】
+if range with define template  block 配合 {{.}}
+具体使用更建议看wang3ye4shu1cheng2项目中的使用
+-----------------------------------------------------
+{{if .}} XXXXX {{end}}
+用于判断后台传到 . 的数据
+
+{{range .}} XXXXX {{end}}
+用于遍历后台传到 . 的数据，一般是slice、map、channel
+XXXXX可以是 {{.}}、{{.field}}等
+也可以是如下
+{{range $k,$v:= .}}              //【这里的.只能是array或slice或map】
+    {{$k}}--{{.}},{{$v}}<br/>    //必须是$。这里的{{.}}和{{$v}}显示的是一样的
+{{end}}
+
+{{with ?}} XXXXX {{.}} {{end}}
+用于将?替换后台传到 . 的数据，？本身也可以是 .  其主要用途是with2.html文件中显示的情况
+
+{{define "模板名"}} XXXXX {{end}
+用于自定义一个模板，如果这个自定义模板是一个HTML文件的一部分，则当t.Execute这个HTML
+文件时，并不会随着一起执行该自定义模板，想该自定义模板也执行，需t.ExecuteTemplate指明
+执行该模板【但无需再解析，因已经随着HTML文件的解析一起解析过了】
+
+{{template "模板名" .}}//有无该点有区别，有则可借该点向“模板名”代表的模板传递后台过来的参数
+用于在一个HTML文件中引用另一个模板的内容，这个"模板名"可以是一个HTML文件，
+也可以是自定义{{define "模板名"}} XXXXX {{end}} 的"模板名"
+
+{{block "模板名" .}} XXXXX {{end}}
+当引用的这个“模板名”未被define时，则显示 XXXXX 。
+    另外参见 go3kuang1jia4gin/20200422-block/main.go
+block配上define，可以实现在不同的页面(html文件)，同一个大框架(本例中a.html中的前后两个aa)内
+的同一位置机动地显示同模块名但不同的内容，甚或直接只显示block与end之间自带的XXXXX内容。

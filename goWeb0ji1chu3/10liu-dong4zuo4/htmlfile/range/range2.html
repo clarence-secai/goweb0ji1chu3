@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        {{range $k,$v := .}}
+        键{{$k}}---值{{$v}}<br/>
+        {{end}}
+    </body>
+    <hr/>
+</html>
+
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        {{range .}}  
+        <!-- 遍历map映射，默认是获得其值而不要键，
+        因此下面一行也可直接写{{.Name}},如果没
+            遍历到值，就会执行else下的内容-->
+           {{.}}
+        {{else}}
+            没有遍历到值
+        {{end}}
+    </body> 
+</html>

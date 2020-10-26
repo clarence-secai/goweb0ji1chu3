@@ -1,0 +1,21 @@
+stripPrifix的用法用途
+http.Handle("/picture/", http.StripPrefix("/picture/", http.FileServer(http.Dir("../picture"))))
+--------------------------------------
+
+1、对于本文件所属文件夹下的pages/index2.html中的<img class="logo_img" alt="" src="/picture/tu.jpg" >
+其中的src被客户端浏览器读取到后，会自动根据src=后的连接向服务器发送请求【如果是一个完整链接，则会通过浏览器获取
+该链接指向的内容】。【src等号后的第一个杠就是localhost：80后面的那个杠。】
+
+2、对于go2web/wang3ye4shu1cheng2/200404/main.go:12中的
+<a href="/pages/customer/loginpage.html">登录</a>
+<a href="/pages/customer/registpage.html">注册</a>
+通过http.Handle("/pages/", http.StripPrefix("/pages/", http.FileServer(http.Dir("./pages"))))
+可以直接导向登录和注册的HTML页面(不含动作{{.}}的)并向客户端呈现。
+
+3、stripPrifix的作用在于，不像返回一个网页那样为该路径注册一个http.HandleFunc，而是
+通过修改路径以指向一个静态文件(如图片，没有动作的HTML文件等)，并返回给客户端浏览器，实现
+和其他返回HTML文件一样的效果(但stripPrifix由于没法t.Execute(rw,"xxxx")来配合HTML中
+的{{.}},因此修改路径后指向的静态文件不能含有动作;同时stripPrifix不像http.HandleFunc
+那样可以进行若干逻辑处理，而是单纯地指向一个静态文件并返回给客户端浏览器。
+
+

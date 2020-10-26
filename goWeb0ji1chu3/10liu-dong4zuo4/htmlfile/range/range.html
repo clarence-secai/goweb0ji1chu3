@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+    </head>
+    结果是：
+    <body>
+        这是range.html文件<br/>
+        <!-- 下面这个的输出是在range和end之间循环直到遍历完 -->
+        {{range .}}
+            {{.Name}}
+            {{.Age}}
+        {{end}}
+    </body>
+</html>
+<!--
+结果是： 这是range.html文件
+jack 27 tom 28 mary 24
+-->

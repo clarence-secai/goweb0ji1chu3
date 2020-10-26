@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <meta charset="TF-8">
+    </head>
+    <body>
+        <form action="/if" method="POST">
+        这里是if的HTML文件<br/>
+        {{if .}}
+            服务器传来的是个成年人
+        {{end}}
+        </form>
+    </body>
+</html>
+
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+    {{if .}}
+        这是对的
+    {{end}}
+    </body>
+</html>

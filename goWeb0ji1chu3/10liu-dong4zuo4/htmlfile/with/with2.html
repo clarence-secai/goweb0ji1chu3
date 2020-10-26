@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+    {{.Name}}
+    {{.Age}}
+        {{with .Students}}<br/>
+          学生姓名：  {{.Name}} <br/>
+{{/*          学生分数：  {{.score}}*/}} //字段score开头小写，故取不到值，因此处不显示还会导致后面的代码也不显示
+        {{end}}
+    <br/>
+    班级情况：<br/>
+        {{with .Classes}}<br/>
+            班级：{{.}}   <br/>
+            班级名称：{{.Name}}  //不会显示
+{{/*        班级名称：{{.[0].Name}}*/}} //报错，故不能学点字段的方式取切片下标,需用range
+        {{end}}
+    </body>
+</html>
